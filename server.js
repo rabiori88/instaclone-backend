@@ -4,9 +4,13 @@ import { ApolloServer, gql } from 'apollo-server';
 const typeDefs = gql`
 
     type Movie {
+        id: Int
         title: String
         year: Int
+        genre: String
+       
     }
+
 
     type Query {
         movies: [Movie]
@@ -50,3 +54,6 @@ const server = new ApolloServer({ typeDefs, resolvers });
 server.listen().then(({ url }) => {
   console.log(`🚀  Server ready at ${url}`);
 });
+
+// P104 에러가 날경우 아래 코드실행
+//  run npx prisma migrate reset --preview-feature
