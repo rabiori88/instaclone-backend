@@ -1,5 +1,10 @@
 // The ApolloServer constructor requires two parameters: your schema
+import { PrismaClient } from '@prisma/client';
 import { ApolloServer, gql } from 'apollo-server';
+
+
+const client =  new PrismaClient();
+
 
 const typeDefs = gql`
 
@@ -8,6 +13,9 @@ const typeDefs = gql`
         title: String
         year: Int
         genre: String
+        createdAt: String
+        updatedAt: String
+
        
     }
 
@@ -18,16 +26,14 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        createMovie(title: String!): Boolean
+        createMovie(title: String!, year: Int!, genre: String!): Movie
         deleteMovie(title: String!): Boolean
     }
 `;
 
 const resolvers = {
     Query: {
-        movies: () => {[]
-        console.log("movies Test");
-        },
+        movies: () =>  client.movie.findMany(),
         movie: () => 
         {
             ({title: "Hello", year: 2021}),
@@ -36,10 +42,15 @@ const resolvers = {
       
     },
     Mutation: {
-        createMovie: (_, {title}) => {
-            console.log(title);
-            return true
-        },
+        createMovie: (_, {title, year, genre}) => 
+            client.movie.create({
+                data:{
+                    title,
+                    year,
+                    genre
+                },     
+            }), 
+        
         deleteMovie: (_, {title}) => {
             console.log(title);
             return true
