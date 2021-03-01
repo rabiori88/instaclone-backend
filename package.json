@@ -5,10 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --exec babel-node server",
-    "migrate": "npx prisma migrate dev --preview-feature",    
+    "migrate": "npx prisma migrate dev --preview-feature",
     "studio": "npx prisma studio",
-    
-    "temp":""
+    "temp": ""
   },
   "repository": {
     "type": "git",
@@ -25,6 +24,7 @@
     "apollo-server": "^2.21.0",
     "dotenv": "^8.2.0",
     "graphql": "^15.5.0",
+    "graphql-tools": "^7.0.4",
     "nodemon": "^2.0.7"
   },
   "devDependencies": {
