@@ -1,2 +1,12 @@
 # instaclone-backend
-instaclone-backend built with Prisam and Grapqhql 
+
+## User:
+
+- [] Cerate Acccount 
+- See Profile
+- Login
+- Edit Profile
+- Follow User
+- Unfollow User
+- Change Avatar 
+
