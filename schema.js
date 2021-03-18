@@ -6,7 +6,7 @@ import { makeExecutableSchema, loadFilesSync, mergeResolvers, mergeType } from "
 // * Menans 모든 파일
 const loadedTypes = loadFilesSync(`${__dirname}/**/*.typeDefs.js`);
 const loadedResolovers = loadFilesSync(
-    `${__dirname}/**/*.{queries, mutations}.js`
+    `${__dirname}/**/*.{queries,mutations}.js`
 );
 const typeDefs = mergeType(loadedTypes);
 const resolvers = mergeResolvers(loadedResolovers);
