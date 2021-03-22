@@ -1,5 +1,5 @@
 import client from "../client";
-
+import bcrypt from "bcrypt";
 
 export default {
     Mutation: {
@@ -7,8 +7,6 @@ export default {
             _, 
             { firstName, lastName, userName, email, password }
             ) => {
-                // Check if username or Email are already on DB.
-
                 
                 const existingUser = await client.user.findFirst({
                     where: {
@@ -23,9 +21,16 @@ export default {
                     },
                 });
 
-                console.log(existingUser);
-                
-                // hash Password
+                const uglyPassword = await bcrypt.hash(password, 10);
+                return client.user.create({
+                    data: {
+                        userName,
+                        email,
+                        firstName,
+                        lastName,
+                        password: uglyPassword,
+                    },
+                })                                
                 // save and return the user
 
 
