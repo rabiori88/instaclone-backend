@@ -1,4 +1,4 @@
-import { gql } from "apollo-server-core";
+import { gql } from "apollo-server";
 
 export default gql`
     type User {
@@ -18,6 +18,7 @@ export default gql`
         error: String
     }
 
+
     type Mutation {
         createAccount(
             firstName: String!
@@ -27,6 +28,7 @@ export default gql`
             password: String!
         ) : User,
         login(userName:String!, password: String!): LoginResult
+        
     }
 
     type Query {

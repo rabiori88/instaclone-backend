@@ -1,5 +1,5 @@
 
-import { makeExecutableSchema, loadFilesSync, mergeResolvers, mergeType } from "graphql-tools";
+import { makeExecutableSchema, loadFilesSync, mergeResolvers, mergeTypeDefs } from "graphql-tools";
 
 
 // ** Menans 모든 폴더 안
@@ -8,7 +8,7 @@ const loadedTypes = loadFilesSync(`${__dirname}/**/*.typeDefs.js`);
 const loadedResolovers = loadFilesSync(
     `${__dirname}/**/*.{queries,mutations}.js`
 );
-const typeDefs = mergeType(loadedTypes);
+const typeDefs = mergeTypeDefs(loadedTypes);
 const resolvers = mergeResolvers(loadedResolovers);
 
 const schema = makeExecutableSchema({typeDefs, resolvers});
