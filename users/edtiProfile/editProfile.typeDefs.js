@@ -8,12 +8,13 @@ export default gql`
     }
 
     type Mutation {       
-        edtiProfile( firstName: String
+        edtiProfile( 
+            firstName: String
             lastName: String
             userName: String
             email: String
             password: String
-            ): EdtiProfileResult!
+        ): EdtiProfileResult!
     }
    
 `
