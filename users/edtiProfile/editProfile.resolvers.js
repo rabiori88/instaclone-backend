@@ -1,5 +1,4 @@
 import client from "../../client";
-
 import bcrypt from "bcrypt";
 
 export default {
@@ -14,9 +13,10 @@ export default {
                 password: newPassword,
                                 
             },
-            { loggedInUser }
+            { loggedInUser, protectResolver }
             )=> {
-                
+               protectResolver(loggedInUser);
+
                console.log(loggedInUser);
                 let uglyPassword = null;
                 if(newPassword) {
