@@ -27,11 +27,13 @@ export const getUser = async(token) => {
 
 };
 
-export const protectResolver =(user) => {
-    if(!user) {
+export const protectResolver = (ourResolver) => (root, args, context, info) => { 
+    if(!context.loggedInUser) {
         return {
             ok: false,
-            error: "You need to login",
-        }
+            error: "Please log in to perform this action.",
+        };
     }
+    return ourResolver(root, args, context, info);
 }
+
