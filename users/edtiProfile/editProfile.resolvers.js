@@ -1,5 +1,5 @@
 import client from "../../client";
-import jwt from "jsonwebtoken";
+
 import bcrypt from "bcrypt";
 
 export default {
@@ -14,11 +14,10 @@ export default {
                 password: newPassword,
                                 
             },
-            { token }
+            { loggedInUser }
             )=> {
                 
-                const { id  } = await jwt.verify(token, process.env.SECRET_KEY);  //Decode Token
-            
+               console.log(loggedInUser);
                 let uglyPassword = null;
                 if(newPassword) {
                     uglyPassword = await bcrypt.hash(newPassword, 10);
@@ -26,7 +25,7 @@ export default {
 
                 const ok =  await client.user.update({
                     where :{
-                     id,
+                     id: loggedInUser.id,
                     }, 
                     data:{
                         firstName, 
