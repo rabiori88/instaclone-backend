@@ -5,14 +5,14 @@ import {ApolloServer} from "apollo-server";
 import schema from "./schema"
 
 
-
+const PORT = process.env.PORT;
 const server = new ApolloServer({
   schema,
+  context: {
+    "token":
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjE4MDU3ODI3fQ.PkTEbNnJW2sTMeEueVo0s1vyv5s0kCEjPZtDrOJYkvg",
+  },
 });
-
-
-
-const PORT = process.env.PORT;
 
 
 server

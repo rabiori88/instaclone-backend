@@ -12,12 +12,13 @@ export default {
                 userName,
                 email,
                 password: newPassword,
-                token
+                                
+            },
+            { token }
+            )=> {
                 
-            })=> {
                 const { id  } = await jwt.verify(token, process.env.SECRET_KEY);  //Decode Token
-                console.log(id);
-
+            
                 let uglyPassword = null;
                 if(newPassword) {
                     uglyPassword = await bcrypt.hash(newPassword, 10);
