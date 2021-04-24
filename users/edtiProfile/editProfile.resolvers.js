@@ -13,10 +13,12 @@ export default {
                     userName,
                     email,
                     password: newPassword,
-                                    
+                    bio,
+                    avatar, 
                 },
                 { loggedInUser }
-                )=> {                     
+                )=> {      
+                    console.log(avatar);               
                   
                     let uglyPassword = null;
                     if(newPassword) {
@@ -32,7 +34,9 @@ export default {
                             lastName, 
                             userName, 
                             email, 
+                            bio,
                             ...(uglyPassword && { password: uglyPassword }),
+                            
                         },
                     });
     
