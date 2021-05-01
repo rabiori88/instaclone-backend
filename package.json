@@ -4,7 +4,8 @@
   "description": "instaclone-backend built with Prisam and Grapqhql",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --exec babel-node server",
+    "preinstall": "npx npm-force-resolutions",
+    "dev": "nodemon --exec babel-node server --delay 2",
     "migrate": "npx prisma migrate dev --preview-feature",
     "studio": "npx prisma studio",
     "temp": ""
@@ -34,5 +35,9 @@
     "@babel/node": "^7.13.10",
     "@babel/preset-env": "^7.13.10",
     "prisma": "^2.19.0"
+  },
+  "resolutions": {
+    "fs-capacitor": "^6.2.0",
+    "graphql-upload": "^11.0.0"
   }
 }
