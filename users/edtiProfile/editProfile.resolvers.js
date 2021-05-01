@@ -1,6 +1,8 @@
+import { createWriteStream } from "fs";
 import client from "../../client";
 import bcrypt from "bcrypt";
 import { protectResolver } from "../users.utils";
+
 
 export default {
     Mutation: {
@@ -19,9 +21,12 @@ export default {
                 { loggedInUser }
                 )=> {      
                     const {filename , createReadStream } = await avatar;
-                    const stream = createReadStream();
+                    const readstream = createReadStream();
+                    const writeStream = createWriteStream(process.cwd() + "/uploads/" + filename);
+                    
+                    readstream.pipe(writeStream);
 
-                    console.log(stream);
+                    console.log(readstream);
                    // console.log(filename, createReadStream);               
                   
                     let uglyPassword = null;
