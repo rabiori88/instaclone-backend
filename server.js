@@ -9,7 +9,7 @@ import { getUser, protectResolver } from "./users/users.utils";
 
 
 const PORT = process.env.PORT;
-const server = new ApolloServer({
+const apollo = new ApolloServer({
   
   typeDefs,
   resolvers,
@@ -23,7 +23,8 @@ const server = new ApolloServer({
 
 const app = express();
 app.use(logger("tiny"));
-server.applyMiddleware({ app });
+app.use("/static", express.static("uploads"));
+apollo.applyMiddleware({ app });
 
 app.listen({port:PORT} , () => {  
       console.log(`🚀 Server ready at http://localhost:${PORT}/graphql`);

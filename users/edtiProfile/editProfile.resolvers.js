@@ -19,16 +19,20 @@ export default {
                     avatar, 
                 },
                 { loggedInUser }
-                )=> {      
-                    const {filename , createReadStream } = await avatar;
-                    const readstream = createReadStream();
-                    const writeStream = createWriteStream(process.cwd() + "/uploads/" + filename);
-                    
-                    readstream.pipe(writeStream);
+                )=> {
+                    let avatarUrl = null;
 
-                    console.log(readstream);
-                   // console.log(filename, createReadStream);               
-                  
+                    if(avatar) {
+                        const {filename , createReadStream } = await avatar;
+                        const newFilename = `${loggedInUser.id}-${Date.now()}-${filename}`
+                        const readstream = createReadStream();
+                        const writeStream = createWriteStream(process.cwd() + "/uploads/" + newFilename);
+                        
+                        readstream.pipe(writeStream);
+                        avatarUrl = `http://localhost:5000/static/${newFilename}`;
+
+                    }
+
                     let uglyPassword = null;
                     if(newPassword) {
                         uglyPassword = await bcrypt.hash(newPassword, 10);
@@ -45,7 +49,7 @@ export default {
                             email, 
                             bio,
                             ...(uglyPassword && { password: uglyPassword }),
-                            
+                            ...(avatarUrl && { avatar: avatarUrl}),
                         },
                     });
     
