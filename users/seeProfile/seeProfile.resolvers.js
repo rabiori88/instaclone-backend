@@ -6,6 +6,10 @@ export default {
         client.user.findUnique({
             where: {
                 userName,
+            },
+            include: {
+                followers: true,
+                following: true,
             }
         })
     }
