@@ -9,24 +9,30 @@ export default {
                 skip:(page - 1 ) * 5
 
             });
-            return {
-                ok:true,
-                followers
-            }
-            console.log(aFollowers.length);
+            
+            const totalFollowers = await client.user.count({
+                where: {following: {some: {userName}}},
+            });
+            console.log(totalFollowers);
+            // return {
+            //     ok:true,
+            //     followers,
+            //     totalPages: Math.ceil(totalFollowers / 5),
+            // }
+            
             
             //Following 한 사람으로 찾기
-            // const bFollowers = await client.user.findMany({
-            //     where: {
-            //         following: {
-            //             some: {
-            //                 userName,
-            //             },
-            //         }
-            //     }
-            // });
+            const bFollowers = await client.user.findMany({
+                where: {
+                    following: {
+                        some: {
+                            userName,
+                        },
+                    }
+                }
+            });
             
-            // console.log(bFollowers.length)
+            console.log(bFollowers)
         }
     }
 }
